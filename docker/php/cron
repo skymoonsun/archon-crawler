@@ -1,0 +1,8 @@
+#     ,------ MINUTE
+#    / ,----- HOUR
+#   / / ,---- DAY OF MONTH
+#  / / / ,--- MONTH
+# / / / / ,-- DAY OF WEEK
+#/ / / / /
+00 12 * * *  /usr/local/bin/php /var/www/app/crawler.php
+#

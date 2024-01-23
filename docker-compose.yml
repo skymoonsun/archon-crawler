@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  archon-network:
+
+services:
+
+  php:
+    build:
+      context: ./docker/php
+    container_name: archon-php
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ./app/:/var/www/app
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - '9000:9000'
+    restart: always
+    networks:
+      - archon-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: archon-nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./app/:/var/www/app
+      - ./docker/nginx/default-compose.conf:/etc/nginx/conf.d/default-compose.conf
+    depends_on:
+      - php
+      - database
+    restart: always
+    networks:
+      - archon-network
+
+  database:
+    image: mysql:8
+    container_name: archon-database
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+    networks:
+      - archon-network
