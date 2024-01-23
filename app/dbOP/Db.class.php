@@ -44,6 +44,21 @@ class DB
         }
     }
 
+    public function prepareTables(){
+        if(!$this->bConnected) return;
+        try{
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS `crawler` (
+                    id INT PRIMARY KEY AUTO_INCREMENT,
+                    url VARCHAR(255) NOT NULL,
+                    word_count INT NOT NULL,
+                    created_at DATETIME NOT NULL
+                )");
+        }catch(PDOException $e){
+            echo $this->ExceptionLog($e->getMessage());
+            die();
+        }
+    }
+
     public function CloseConnection()
     {
         $this->pdo = null;
