@@ -21,7 +21,10 @@ foreach ($links as $link){
     $content = @str_get_html(file_get_contents($link, false, stream_context_create($arrContextOptions)));
     $results = $content->find("div.entry-content", 0);
 
-    $wordCount = calculateWordCount($results->plaintext);
+    $wordCount = 0;
+    if(is_object($results)) {
+        $wordCount = calculateWordCount($results->plaintext);
+    }
     $createdAt = date('Y-m-d H:i:s');
 
     $crawler = new Crawler();
@@ -32,3 +35,5 @@ foreach ($links as $link){
 
     $crawler->create();
 }
+
+echo "Done!";
