@@ -4,5 +4,5 @@
 #  / / / ,--- MONTH
 # / / / / ,-- DAY OF WEEK
 #/ / / / /
-00 12 * * *  /usr/local/bin/php /var/www/app/crawler.php
+0 */2 * * *  /usr/local/bin/php /var/www/app/crawler.php
 #
