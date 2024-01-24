@@ -10,12 +10,17 @@ Docker container bash:
 docker exec -it archon-php bash
 ```
 
-Show crontab:
+Prepare database (in php bash):
+```
+php prepare_database.php
+```
+
+Show crontab (in php bash):
 ```
 crontab -l
 ```
 
-Show running jobs:
+Show running jobs (in php bash):
 ```
 pstree -apl `pidof cron`
 ```
