@@ -1,5 +1,4 @@
 <?php
-require("Log.class.php");
 class DB
 {
     private $pdo;
@@ -9,14 +8,11 @@ class DB
     private $settings;
     
     private $bConnected = false;
-    	
-    private $log;
     
     private $parameters;
 
     public function __construct()
     {
-        $this->log = new Log();
         $this->Connect();
         $this->parameters = array();
     }
